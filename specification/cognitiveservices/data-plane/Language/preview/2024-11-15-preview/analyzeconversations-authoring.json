@@ -1167,6 +1167,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Successful List Exported Models": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulListExportedModels.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1208,6 +1213,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Exported Model": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetExportedModel.json"
           }
         }
       },
@@ -1260,6 +1270,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Successful Create Exported Model": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulCreateExportedModel.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -1300,6 +1315,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Delete Exported Model": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulDeleteExportedModel.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1348,6 +1368,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Exported Model Status": {
+            "$ref": "./examples/analyzeconversations-authoring/SuccessfulGetExportedModelStatus.json"
           }
         }
       }
