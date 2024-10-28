@@ -230,6 +230,9 @@
             "$ref": "./examples/analyzetext-authoring/SuccessfulDeleteProject.json"
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -326,6 +329,9 @@
             "$ref": "./examples/analyzetext-authoring/SuccessfulCopyProject.json"
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -403,6 +409,9 @@
             "$ref": "./examples/analyzetext-authoring/SuccessfulExportProject.json"
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -461,6 +470,9 @@
             "$ref": "./examples/analyzetext-authoring/SuccessfulImportProject.json"
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -511,6 +523,10 @@
           "SuccessfulTrainProject": {
             "$ref": "./examples/analyzetext-authoring/SuccessfulTrainProject.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location",
+          "final-state-schema": "#/definitions/TextAnalysisAuthoringTrainingJobResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -705,6 +721,9 @@
             "$ref": "./examples/analyzetext-authoring/SuccessfulDeployProject.json"
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -751,6 +770,9 @@
           "SuccessfulDeleteDeployment": {
             "$ref": "./examples/analyzetext-authoring/SuccessfulDeleteDeployment.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
         },
         "x-ms-long-running-operation": true
       }
@@ -809,6 +831,9 @@
           "SuccessfulDeleteDeploymentFromResources": {
             "$ref": "./examples/analyzetext-authoring/SuccessfulDeleteDeploymentFromResources.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
         },
         "x-ms-long-running-operation": true
       }
@@ -962,6 +987,9 @@
           "SuccessfulSwapDeployments": {
             "$ref": "./examples/analyzetext-authoring/SuccessfulSwapDeployments.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1200,6 +1228,9 @@
             "$ref": "./examples/analyzetext-authoring/SuccessfulCreateExportedModel.json"
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
         "x-ms-long-running-operation": true
       },
       "delete": {
@@ -1246,6 +1277,9 @@
           "SuccessfulDeleteExportedModel": {
             "$ref": "./examples/analyzetext-authoring/SuccessfulDeleteExportedModel.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1576,6 +1610,10 @@
             "$ref": "./examples/analyzetext-authoring/SuccessfulEvaluationProject.json"
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location",
+          "final-state-schema": "#/definitions/TextAnalysisAuthoringEvaluationJobResult"
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -1624,6 +1662,9 @@
           "SuccessfulLoadSnapshot": {
             "$ref": "./examples/analyzetext-authoring/SuccessfulLoadSnapshot.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1930,6 +1971,9 @@
             "$ref": "./examples/analyzetext-authoring/SuccessfulAssignDeploymentResources.json"
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -1980,6 +2024,9 @@
           "SuccessfulUnassignDeploymentResources": {
             "$ref": "./examples/analyzetext-authoring/SuccessfulUnassignDeploymentResources.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
         },
         "x-ms-long-running-operation": true
       }
