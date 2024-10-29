@@ -25,33 +25,33 @@ interface ConversationalAnalysisAuthoring {
    * Lists the existing projects.
    */
   listProjects is languageOperations.ResourceList<
-    ConversationalAnalysisAuthoringProjectMetadata,
+    ProjectMetadata,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   /**
    * Gets the details of a project.
    */
-  getProject is languageOperations.ResourceRead<ConversationalAnalysisAuthoringProjectMetadata>;
+  getProject is languageOperations.ResourceRead<ProjectMetadata>;
 
   /**
    * Creates a new project or updates an existing one.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to rename the body"
-  @createsOrUpdatesResource(ConversationalAnalysisAuthoringProjectMetadata)
+  @createsOrUpdatesResource(ProjectMetadata)
   @parameterVisibility
   @patch
   createProject is Foundations.ResourceOperation<
-    ConversationalAnalysisAuthoringProjectMetadata,
+    ProjectMetadata,
     {
       @doc("This request has a JSON Merge Patch body.")
       @TypeSpec.Http.header("Content-Type")
       contentType: "application/merge-patch+json";
 
       /** The request body */
-      @bodyRoot body: ConversationalAnalysisAuthoringCreateProjectOptions;
+      @bodyRoot body: CreateProjectOptions;
     },
-    Foundations.ResourceCreatedOrOkResponse<ConversationalAnalysisAuthoringProjectMetadata>,
+    Foundations.ResourceCreatedOrOkResponse<ProjectMetadata>,
     {},
     ErrorResponse
   >;
@@ -87,9 +87,9 @@ interface ConversationalAnalysisAuthoring {
   @actionSeparator("/:")
   @action("authorize-copy")
   copyProjectAuthorization is languageOperations.ResourceAction<
-    ConversationalAnalysisAuthoringProjectMetadata,
-    ConversationalAnalysisAuthoringCopyAuthorizationOptions,
-    ConversationalAnalysisAuthoringCopyProjectOptions
+    ProjectMetadata,
+    CopyAuthorizationOptions,
+    CopyProjectOptions
   >;
 
   /**
@@ -113,7 +113,7 @@ interface ConversationalAnalysisAuthoring {
        * The copy project info.
        */
       @body
-      body: ConversationalAnalysisAuthoringCopyProjectOptions;
+      body: CopyProjectOptions;
     },
     AcceptedResponse,
     {},
@@ -195,7 +195,7 @@ interface ConversationalAnalysisAuthoring {
        * The project data to import.
        */
       @body
-      body: ConversationalAnalysisAuthoringExportedProject;
+      body: ExportedProject;
     },
     AcceptedResponse,
     {},
@@ -222,7 +222,7 @@ interface ConversationalAnalysisAuthoring {
        * The training input parameters.
        */
       @body
-      body: ConversationalAnalysisAuthoringTrainingJobOptions;
+      body: TrainingJobOptions;
     },
     AcceptedResponse,
     {},
@@ -233,13 +233,13 @@ interface ConversationalAnalysisAuthoring {
    * Gets the status of an existing copy project job.
    */
   @added(Versions.v2023_04_15_preview)
-  getCopyProjectStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringCopyProjectJobState>;
+  getCopyProjectStatus is languageOperations.ResourceRead<CopyProjectJobState>;
 
   /**
    * Lists the deployments belonging to a project.
    */
   listDeployments is languageOperations.ResourceList<
-    ConversationalAnalysisAuthoringProjectDeployment,
+    ProjectDeployment,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
@@ -263,7 +263,7 @@ interface ConversationalAnalysisAuthoring {
        * The job object to swap two deployments.
        */
       @body
-      body: ConversationalAnalysisAuthoringSwapDeploymentsOptions;
+      body: SwapDeploymentsOptions;
     },
     AcceptedResponse,
     {},
@@ -274,7 +274,7 @@ interface ConversationalAnalysisAuthoring {
    * Gets the details of a deployment.
    */
   @get
-  getDeployment is languageOperations.ResourceRead<ConversationalAnalysisAuthoringProjectDeployment>;
+  getDeployment is languageOperations.ResourceRead<ProjectDeployment>;
 
   /**
    * Creates a new deployment or replaces an existing one.
@@ -302,7 +302,7 @@ interface ConversationalAnalysisAuthoring {
        * The new deployment info.
        */
       @body
-      body: ConversationalAnalysisAuthoringCreateDeploymentOptions;
+      body: CreateDeploymentOptions;
     },
     AcceptedResponse,
     {},
@@ -365,7 +365,7 @@ interface ConversationalAnalysisAuthoring {
        * The options for deleting the deployment.
        */
       @body
-      body: ConversationalAnalysisAuthoringDeleteDeploymentOptions;
+      body: DeleteDeploymentOptions;
     },
     AcceptedResponse,
     {},
@@ -376,46 +376,46 @@ interface ConversationalAnalysisAuthoring {
    * Gets the status of an existing delete deployment from specific resources job.
    */
   @added(Versions.v2023_04_15_preview)
-  getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringDeploymentDeleteFromResourcesJobState>;
+  getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<DeploymentDeleteFromResourcesJobState>;
 
   /**
    * Gets the status of an existing deployment job.
    */
-  getDeploymentStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringDeploymentJobState>;
+  getDeploymentStatus is languageOperations.ResourceRead<DeploymentJobState>;
 
   /**
    * Gets the status of an existing swap deployment job.
    */
-  getSwapDeploymentsStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringSwapDeploymentsJobState>;
+  getSwapDeploymentsStatus is languageOperations.ResourceRead<SwapDeploymentsJobState>;
 
   /**
    * Gets the status of an export job. Once job completes, returns the project
    * metadata, and assets.
    */
-  getExportStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringExportProjectJobState>;
+  getExportStatus is languageOperations.ResourceRead<ExportProjectJobState>;
 
   /**
    * Gets the status for an import.
    */
-  getImportStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringImportProjectJobState>;
+  getImportStatus is languageOperations.ResourceRead<ImportProjectJobState>;
 
   /**
    * Lists the trained models belonging to a project.
    */
   listTrainedModels is languageOperations.ResourceList<
-    ConversationalAnalysisAuthoringProjectTrainedModel,
+    ProjectTrainedModel,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   /**
    * Gets the details of a trained model.
    */
-  getTrainedModel is languageOperations.ResourceRead<ConversationalAnalysisAuthoringProjectTrainedModel>;
+  getTrainedModel is languageOperations.ResourceRead<ProjectTrainedModel>;
 
   /**
    * Deletes an existing trained model.
    */
-  deleteTrainedModel is languageOperations.ResourceDelete<ConversationalAnalysisAuthoringProjectTrainedModel>;
+  deleteTrainedModel is languageOperations.ResourceDelete<ProjectTrainedModel>;
 
   /**
    * Triggers evaluation operation on a trained model.
@@ -444,7 +444,7 @@ interface ConversationalAnalysisAuthoring {
        * The training input parameters.
        */
       @body
-      body: ConversationalAnalysisAuthoringEvaluationOptions;
+      body: EvaluationOptions;
     },
     AcceptedResponse,
     {},
@@ -483,14 +483,14 @@ interface ConversationalAnalysisAuthoring {
    * Gets the status for an evaluation job.
    */
   @added(Versions.v2023_04_15_preview)
-  getEvaluationStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringEvaluationJobState>;
+  getEvaluationStatus is languageOperations.ResourceRead<EvaluationJobState>;
 
   /**
    * Gets the detailed results of the evaluation for a trained model. This includes
    * the raw inference results for the data included in the evaluation process.
    */
   getModelEvaluationResults is languageOperations.ResourceList<
-    ConversationalAnalysisAuthoringUtteranceEvaluationResult,
+    UtteranceEvaluationResult,
     ListQueryParametersTrait<StandardListQueryParameters &
       StringIndexTypeQueryParameter>
   >;
@@ -517,7 +517,7 @@ interface ConversationalAnalysisAuthoring {
       @path
       trainedModelLabel: string;
     },
-    ConversationalAnalysisAuthoringEvaluationSummary,
+    EvaluationSummary,
     {},
     ErrorResponse
   >;
@@ -525,14 +525,14 @@ interface ConversationalAnalysisAuthoring {
   /**
    * Gets the status for loading a snapshot.
    */
-  getLoadSnapshotStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringLoadSnapshotJobState>;
+  getLoadSnapshotStatus is languageOperations.ResourceRead<LoadSnapshotJobState>;
 
   /**
    * Lists the deployments resources assigned to the project.
    */
   @added(Versions.v2023_04_15_preview)
   listDeploymentResources is languageOperations.ResourceList<
-    ConversationalAnalysisAuthoringAssignedDeploymentResource,
+    AssignedDeploymentResource,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
@@ -563,7 +563,7 @@ interface ConversationalAnalysisAuthoring {
        * The new project resources info.
        */
       @body
-      body: ConversationalAnalysisAuthoringAssignDeploymentResourcesOptions;
+      body: AssignDeploymentResourcesOptions;
     },
     AcceptedResponse,
     {},
@@ -594,7 +594,7 @@ interface ConversationalAnalysisAuthoring {
        * The info for the deployment resources to be deleted.
        */
       @body
-      body: ConversationalAnalysisAuthoringUnassignDeploymentResourcesOptions;
+      body: UnassignDeploymentResourcesOptions;
     },
     AcceptedResponse,
     {},
@@ -605,7 +605,7 @@ interface ConversationalAnalysisAuthoring {
    * Gets the status of an existing assign deployment resources job.
    */
   @added(Versions.v2023_04_15_preview)
-  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringDeploymentResourcesJobState>;
+  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<DeploymentResourcesJobState>;
 
   /**
    * Gets the status of an existing unassign deployment resources job.
@@ -629,7 +629,7 @@ interface ConversationalAnalysisAuthoring {
       @path
       jobId: string;
     },
-    ConversationalAnalysisAuthoringDeploymentResourcesJobState,
+    DeploymentResourcesJobState,
     {},
     ErrorResponse
   >;
@@ -638,14 +638,14 @@ interface ConversationalAnalysisAuthoring {
    * Lists the non-expired training jobs created for a project.
    */
   listTrainingJobs is languageOperations.ResourceList<
-    ConversationalAnalysisAuthoringTrainingJobState,
+    TrainingJobState,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   /**
    * Gets the status for a training job.
    */
-  getTrainingStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringTrainingJobState>;
+  getTrainingStatus is languageOperations.ResourceRead<TrainingJobState>;
 
   /**
    * Triggers a cancellation for a running training job.
@@ -688,7 +688,7 @@ interface ConversationalAnalysisAuthoring {
       @path
       jobId: string;
     },
-    ConversationalAnalysisAuthoringProjectDeletionJobState,
+    ProjectDeletionJobState,
     {},
     ErrorResponse
   >;
@@ -722,7 +722,7 @@ interface ConversationalAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    ConversationalAnalysisAuthoringAssignedResourceDeploymentsMetadata,
+    AssignedResourceDeploymentsMetadata,
     {},
     ErrorResponse
   >;
@@ -760,7 +760,7 @@ interface ConversationalAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    ConversationalAnalysisAuthoringSupportedLanguages,
+    SupportedLanguages,
     {},
     ErrorResponse
   >;
@@ -807,7 +807,7 @@ interface ConversationalAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    ConversationalAnalysisAuthoringPrebuiltEntities,
+    PrebuiltEntities,
     {},
     ErrorResponse
   >;
@@ -845,7 +845,7 @@ interface ConversationalAnalysisAuthoring {
       @query("maxpagesize")
       maxpagesize?: int32;
     },
-    ConversationalAnalysisAuthoringTrainingConfigVersions,
+    TrainingConfigVersions,
     {},
     ErrorResponse
   >;
@@ -854,13 +854,13 @@ interface ConversationalAnalysisAuthoring {
    * Gets the details of an exported model.
    */
   @added(Versions.v2024_11_15_preview)
-  getExportedModel is languageOperations.ResourceRead<ConversationalAnalysisAuthoringExportedTrainedModel>;
+  getExportedModel is languageOperations.ResourceRead<ExportedTrainedModel>;
   /**
    * Lists the exported models belonging to a project.
    */
   @added(Versions.v2024_11_15_preview)
   listExportedModels is languageOperations.ResourceList<
-    ConversationalAnalysisAuthoringExportedTrainedModel,
+    ExportedTrainedModel,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 /**
@@ -912,7 +912,7 @@ interface ConversationalAnalysisAuthoring {
        * The exported model info.
        */
       @body
-      body: ConversationalAnalysisAuthoringExportedModelOptions;
+      body: ExportedModelOptions;
     },
     AcceptedResponse,
     {},
@@ -922,6 +922,6 @@ interface ConversationalAnalysisAuthoring {
    * Gets the status for an existing job to create or update an exported model.
    */
 @added(Versions.v2024_11_15_preview)
-  getExportedModelJobStatus is languageOperations.ResourceRead<ConversationalAnalysisAuthoringExportedModelJobState>;
+  getExportedModelJobStatus is languageOperations.ResourceRead<ExportedModelJobState>;
 
 }

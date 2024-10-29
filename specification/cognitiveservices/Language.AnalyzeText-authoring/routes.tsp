@@ -25,30 +25,30 @@ interface TextAnalysisAuthoring {
    * Lists the existing projects.
    */
   listProjects is languageOperations.ResourceList<
-    TextAnalysisAuthoringProjectMetadata,
+    ProjectMetadata,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   /**
    * Gets the details of a project.
    */
-  getProject is languageOperations.ResourceRead<TextAnalysisAuthoringProjectMetadata>;
+  getProject is languageOperations.ResourceRead<ProjectMetadata>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to rename the body"
-  @createsOrUpdatesResource(TextAnalysisAuthoringProjectMetadata)
+  @createsOrUpdatesResource(ProjectMetadata)
   @parameterVisibility
   @patch
   createProject is Foundations.ResourceOperation<
-    TextAnalysisAuthoringProjectMetadata,
+    ProjectMetadata,
     {
       @doc("This request has a JSON Merge Patch body.")
       @TypeSpec.Http.header("Content-Type")
       contentType: "application/merge-patch+json";
 
       /** The request body */
-      @bodyRoot body: TextAnalysisAuthoringCreateProjectOptions;
+      @bodyRoot body: CreateProjectOptions;
     },
-    Foundations.ResourceCreatedOrOkResponse<TextAnalysisAuthoringProjectMetadata>,
+    Foundations.ResourceCreatedOrOkResponse<ProjectMetadata>,
     {},
     ErrorResponse
   >;
@@ -82,9 +82,9 @@ interface TextAnalysisAuthoring {
   @actionSeparator("/:")
   @action("authorize-copy")
   copyProjectAuthorization is languageOperations.ResourceAction<
-    TextAnalysisAuthoringProjectMetadata,
-    TextAnalysisAuthoringCopyAuthorizationOptions,
-    TextAnalysisAuthoringCopyProjectOptions
+    ProjectMetadata,
+    CopyAuthorizationOptions,
+    CopyProjectOptions
   >;
 
   /**
@@ -107,7 +107,7 @@ interface TextAnalysisAuthoring {
        * The copy project info.
        */
       @body
-      body: TextAnalysisAuthoringCopyProjectOptions;
+      body: CopyProjectOptions;
     },
     AcceptedResponse,
     {},
@@ -182,7 +182,7 @@ interface TextAnalysisAuthoring {
        * The project data to import.
        */
       @body
-      body: TextAnalysisAuthoringExportedProject;
+      body: ExportedProject;
     },
     AcceptedResponse,
     {},
@@ -208,7 +208,7 @@ interface TextAnalysisAuthoring {
        * The training input parameters.
        */
       @body
-      body: TextAnalysisAuthoringTrainingJobOptions;
+      body: TrainingJobOptions;
     },
     AcceptedResponse,
     {},
@@ -219,20 +219,20 @@ interface TextAnalysisAuthoring {
    * Gets the status of an existing copy project job.
    */
   @added(Versions.v2023_04_15_preview)
-  getCopyProjectStatus is languageOperations.ResourceRead<TextAnalysisAuthoringCopyProjectJobState>;
+  getCopyProjectStatus is languageOperations.ResourceRead<CopyProjectJobState>;
 
   /**
    * Lists the deployments belonging to a project.
    */
   listDeployments is languageOperations.ResourceList<
-    TextAnalysisAuthoringProjectDeployment,
+    ProjectDeployment,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   /**
    * Gets the details of a deployment.
    */
-  getDeployment is languageOperations.ResourceRead<TextAnalysisAuthoringProjectDeployment>;
+  getDeployment is languageOperations.ResourceRead<ProjectDeployment>;
 
   /**
    * Creates a new deployment or replaces an existing one.
@@ -259,7 +259,7 @@ interface TextAnalysisAuthoring {
        * The new deployment info.
        */
       @body
-      body: TextAnalysisAuthoringCreateDeploymentOptions;
+      body: CreateDeploymentOptions;
     },
     AcceptedResponse,
     {},
@@ -320,7 +320,7 @@ interface TextAnalysisAuthoring {
        * The options for deleting the deployment.
        */
       @body
-      body: TextAnalysisAuthoringDeleteDeploymentOptions;
+      body: DeleteDeploymentOptions;
     },
     AcceptedResponse,
     {},
@@ -331,12 +331,12 @@ interface TextAnalysisAuthoring {
    * Gets the status of an existing delete deployment from specific resources job.
    */
   @added(Versions.v2023_04_15_preview)
-  getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringDeploymentDeleteFromResourcesJobState>;
+  getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<DeploymentDeleteFromResourcesJobState>;
 
   /**
    * Gets the status of an existing deployment job.
    */
-  getDeploymentStatus is languageOperations.ResourceRead<TextAnalysisAuthoringDeploymentJobState>;
+  getDeploymentStatus is languageOperations.ResourceRead<DeploymentJobState>;
 
   /**
    * Swaps two existing deployments with each other.
@@ -357,7 +357,7 @@ interface TextAnalysisAuthoring {
        * The job object to swap two deployments.
        */
       @body
-      body: TextAnalysisAuthoringSwapDeploymentsOptions;
+      body: SwapDeploymentsOptions;
     },
     AcceptedResponse,
     {},
@@ -367,20 +367,20 @@ interface TextAnalysisAuthoring {
   /**
    * Gets the status of an existing swap deployment job.
    */
-  getSwapDeploymentsStatus is languageOperations.ResourceRead<TextAnalysisAuthoringSwapDeploymentsJobState>;
+  getSwapDeploymentsStatus is languageOperations.ResourceRead<SwapDeploymentsJobState>;
 
   /**
    * Gets the status of an export job. Once job completes, returns the project
    * metadata, and assets.
    */
-  getExportStatus is languageOperations.ResourceRead<TextAnalysisAuthoringExportProjectJobState>;
+  getExportStatus is languageOperations.ResourceRead<ExportProjectJobState>;
 
   /**
    * Lists the exported models belonging to a project.
    */
   @added(Versions.v2023_04_15_preview)
   listExportedModels is languageOperations.ResourceList<
-    TextAnalysisAuthoringExportedTrainedModel,
+    ExportedTrainedModel,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
@@ -388,7 +388,7 @@ interface TextAnalysisAuthoring {
    * Gets the details of an exported model.
    */
   @added(Versions.v2023_04_15_preview)
-  getExportedModel is languageOperations.ResourceRead<TextAnalysisAuthoringExportedTrainedModel>;
+  getExportedModel is languageOperations.ResourceRead<ExportedTrainedModel>;
 
   /**
    * Creates a new exported model or replaces an existing one.
@@ -416,7 +416,7 @@ interface TextAnalysisAuthoring {
        * The exported model info.
        */
       @body
-      body: TextAnalysisAuthoringExportedModelOptions;
+      body: ExportedModelOptions;
     },
     AcceptedResponse,
     {},
@@ -454,7 +454,7 @@ interface TextAnalysisAuthoring {
    * Gets the status for an existing job to create or update an exported model.
    */
   @added(Versions.v2023_04_15_preview)
-  getExportedModelJobStatus is languageOperations.ResourceRead<TextAnalysisAuthoringExportedModelJobState>;
+  getExportedModelJobStatus is languageOperations.ResourceRead<ExportedModelJobState>;
 
   /**
    * Gets the details and URL needed to download the exported model.
@@ -477,7 +477,7 @@ interface TextAnalysisAuthoring {
       @path
       exportedModelName: string;
     },
-    TextAnalysisAuthoringExportedModelManifest,
+    ExportedModelManifest,
     {},
     ErrorResponse
   >;
@@ -485,25 +485,25 @@ interface TextAnalysisAuthoring {
   /**
    * Gets the status for an import.
    */
-  getImportStatus is languageOperations.ResourceRead<TextAnalysisAuthoringImportProjectJobState>;
+  getImportStatus is languageOperations.ResourceRead<ImportProjectJobState>;
 
   /**
    * Lists the trained models belonging to a project.
    */
   listTrainedModels is languageOperations.ResourceList<
-    TextAnalysisAuthoringProjectTrainedModel,
+    ProjectTrainedModel,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   /**
    * Gets the details of a trained model.
    */
-  getTrainedModel is languageOperations.ResourceRead<TextAnalysisAuthoringProjectTrainedModel>;
+  getTrainedModel is languageOperations.ResourceRead<ProjectTrainedModel>;
 
   /**
    * Deletes an existing trained model.
    */
-  deleteTrainedModel is languageOperations.ResourceDelete<TextAnalysisAuthoringProjectTrainedModel>;
+  deleteTrainedModel is languageOperations.ResourceDelete<ProjectTrainedModel>;
 
   /**
    * Triggers evaluation operation on a trained model.
@@ -531,7 +531,7 @@ interface TextAnalysisAuthoring {
        * The training input parameters.
        */
       @body
-      body: TextAnalysisAuthoringEvaluationOptions;
+      body: EvaluationOptions;
     },
     AcceptedResponse,
     {},
@@ -565,14 +565,14 @@ interface TextAnalysisAuthoring {
    * Gets the status for an evaluation job.
    */
   @added(Versions.v2023_04_15_preview)
-  getEvaluationStatus is languageOperations.ResourceRead<TextAnalysisAuthoringEvaluationJobState>;
+  getEvaluationStatus is languageOperations.ResourceRead<EvaluationJobState>;
 
   /**
    * Gets the detailed results of the evaluation for a trained model. This includes
    * the raw inference results for the data included in the evaluation process.
    */
   getModelEvaluationResults is languageOperations.ResourceList<
-    TextAnalysisAuthoringDocumentEvaluationResult,
+    DocumentEvaluationResult,
     ListQueryParametersTrait<StandardListQueryParameters &
       StringIndexTypeQueryParameter>
   >;
@@ -598,7 +598,7 @@ interface TextAnalysisAuthoring {
       @path
       trainedModelLabel: string;
     },
-    TextAnalysisAuthoringEvaluationSummary,
+    EvaluationSummary,
     {},
     ErrorResponse
   >;
@@ -606,14 +606,14 @@ interface TextAnalysisAuthoring {
   /**
    * Gets the status for loading a snapshot.
    */
-  getLoadSnapshotStatus is languageOperations.ResourceRead<TextAnalysisAuthoringLoadSnapshotJobState>;
+  getLoadSnapshotStatus is languageOperations.ResourceRead<LoadSnapshotJobState>;
 
   /**
    * Lists the deployments resources assigned to the project.
    */
   @added(Versions.v2023_04_15_preview)
   listDeploymentResources is languageOperations.ResourceList<
-    TextAnalysisAuthoringAssignedDeploymentResource,
+    AssignedDeploymentResource,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
@@ -641,7 +641,7 @@ interface TextAnalysisAuthoring {
        * The new project resources info.
        */
       @body
-      body: TextAnalysisAuthoringAssignDeploymentResourcesOptions;
+      body: AssignDeploymentResourcesOptions;
     },
     AcceptedResponse,
     {},
@@ -669,7 +669,7 @@ interface TextAnalysisAuthoring {
        * The info for the deployment resources to be deleted.
        */
       @body
-      body: TextAnalysisAuthoringUnassignDeploymentResourcesOptions;
+      body: UnassignDeploymentResourcesOptions;
     },
     AcceptedResponse,
     {},
@@ -680,26 +680,26 @@ interface TextAnalysisAuthoring {
    * Gets the status of an existing assign deployment resources job.
    */
   @added(Versions.v2023_04_15_preview)
-  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringAssignDeploymentResourcesJobState>;
+  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<AssignDeploymentResourcesJobState>;
 
   /**
    * Gets the status of an existing unassign deployment resources job.
    */
   @added(Versions.v2023_04_15_preview)
-  getUnassignDeploymentResourcesStatus is languageOperations.ResourceRead<TextAnalysisAuthoringUnassignDeploymentResourcesJobState>;
+  getUnassignDeploymentResourcesStatus is languageOperations.ResourceRead<UnassignDeploymentResourcesJobState>;
 
   /**
    * Lists the non-expired training jobs created for a project.
    */
   listTrainingJobs is languageOperations.ResourceList<
-    TextAnalysisAuthoringTrainingJobState,
+    TrainingJobState,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
   /**
    * Gets the status for a training job.
    */
-  getTrainingStatus is languageOperations.ResourceRead<TextAnalysisAuthoringTrainingJobState>;
+  getTrainingStatus is languageOperations.ResourceRead<TrainingJobState>;
 
   /**
    * Triggers a cancellation for a running training job.
@@ -730,7 +730,7 @@ interface TextAnalysisAuthoring {
   /**
    * Gets the status for a project deletion job.
    */
-  getProjectDeletionStatus is languageOperations.ResourceRead<TextAnalysisAuthoringProjectDeletionJobState>;
+  getProjectDeletionStatus is languageOperations.ResourceRead<ProjectDeletionJobState>;
 
   /**
    * Lists the deployments to which an Azure resource is assigned. This doesn't
@@ -739,7 +739,7 @@ interface TextAnalysisAuthoring {
    */
   @added(Versions.v2023_04_15_preview)
   listAssignedResourceDeployments is languageOperations.ResourceList<
-    TextAnalysisAuthoringAssignedProjectDeploymentsMetadata,
+    AssignedProjectDeploymentsMetadata,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
@@ -747,7 +747,7 @@ interface TextAnalysisAuthoring {
    * Lists the supported languages.
    */
   getSupportedLanguages is languageOperations.ResourceList<
-    TextAnalysisAuthoringSupportedLanguage,
+    SupportedLanguage,
     ListQueryParametersTrait<ProjectKindQueryParameter &
       StandardListQueryParameters>
   >;
@@ -758,7 +758,7 @@ interface TextAnalysisAuthoring {
    */
   @added(Versions.v2023_04_15_preview)
   getSupportedPrebuiltEntities is languageOperations.ResourceList<
-    TextAnalysisAuthoringPrebuiltEntity,
+    PrebuiltEntity,
     SupportedPrebuiltEntitiesQueryParameter & StandardListQueryParameters
   >;
 

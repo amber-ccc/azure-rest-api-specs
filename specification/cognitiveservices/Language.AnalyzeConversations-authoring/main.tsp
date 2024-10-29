@@ -42,8 +42,7 @@ using TypeSpec.Versioning;
      * Supported Cognitive Services endpoint (e.g.,
      * https://<resource-name>.api.cognitiveservices.azure.com).
      */
-    endpoint: string,
-
+    @format("url")
     Endpoint: string,
   }
 )
